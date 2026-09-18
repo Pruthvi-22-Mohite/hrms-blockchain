@@ -59,7 +59,7 @@ export default function RevokeAccessModal({ record, doctor, onSuccess }) {
         Revoke
       </button>
 
-      <Modal isOpen={isOpen} onClose={handleClose} title="Revoke Doctor Access" size="sm">
+      <Modal isOpen={isOpen} onClose={handleClose} title="Revoke Access">
         {revokeResult ? (
           <div className="modal-body">
             <div
@@ -109,16 +109,19 @@ export default function RevokeAccessModal({ record, doctor, onSuccess }) {
               </div>
             )}
 
-            <p className="confirm-text">
-              Are you sure you want to revoke <strong>{doctor.name}</strong>'s access to{' '}
-              <strong>{record.label}</strong>?
+            <div style={{ marginBottom: '16px' }}>
+              <div style={{ fontSize: '0.875rem', color: 'var(--color-text-muted)' }}>Doctor: <strong style={{ color: 'var(--color-text-primary)' }}>{doctor.name}</strong></div>
+              <div style={{ fontSize: '0.875rem', color: 'var(--color-text-muted)', marginTop: '4px' }}>Record: <strong style={{ color: 'var(--color-text-primary)' }}>{record.label}</strong></div>
+            </div>
+
+            <p className="confirm-text" style={{ fontSize: '1rem', fontWeight: 'var(--font-weight-medium)', color: 'var(--color-text-primary)' }}>
+              This doctor will no longer be able to retrieve this record.
             </p>
             <p
               className="confirm-text"
-              style={{ marginTop: '10px', color: 'var(--color-text-muted)' }}
+              style={{ marginTop: '8px', color: 'var(--color-text-muted)', fontSize: '0.875rem' }}
             >
-              This action will be recorded on the blockchain. The doctor will immediately
-              lose the ability to view this record.
+              This revocation is submitted and confirmed on-chain. Future retrieval attempts will be denied.
             </p>
 
             <div

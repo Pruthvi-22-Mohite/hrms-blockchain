@@ -28,16 +28,42 @@ export default function DoctorDashboard() {
 
   const navItems = [
     {
-      label: 'Doctor Dashboard',
+      label: 'Dashboard',
       active: true,
       icon: (
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-          <rect x="1" y="1" width="6" height="6" rx="1" stroke="currentColor" strokeWidth="1.5"/>
-          <rect x="9" y="1" width="6" height="6" rx="1" stroke="currentColor" strokeWidth="1.5"/>
-          <rect x="1" y="9" width="6" height="6" rx="1" stroke="currentColor" strokeWidth="1.5"/>
-          <rect x="9" y="9" width="6" height="6" rx="1" stroke="currentColor" strokeWidth="1.5"/>
+        <svg width="18" height="18" viewBox="0 0 16 16" fill="none">
+          <rect x="1" y="1" width="6" height="6" rx="1.5" stroke="currentColor" strokeWidth="1.6"/>
+          <rect x="9" y="1" width="6" height="6" rx="1.5" stroke="currentColor" strokeWidth="1.6"/>
+          <rect x="1" y="9" width="6" height="6" rx="1.5" stroke="currentColor" strokeWidth="1.6"/>
+          <rect x="9" y="9" width="6" height="6" rx="1.5" stroke="currentColor" strokeWidth="1.6"/>
         </svg>
       ),
+    },
+    {
+      label: 'Records',
+      active: false,
+      icon: (
+        <svg width="18" height="18" viewBox="0 0 16 16" fill="none">
+          <path d="M3 2h10a1 1 0 011 1v10a1 1 0 01-1 1H3a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" strokeWidth="1.6"/>
+          <path d="M5 5h6M5 8h6M5 11h4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/>
+        </svg>
+      ),
+      onClick: () => {
+        document.getElementById('record-id-input')?.focus();
+      },
+    },
+    {
+      label: 'Access Check',
+      active: false,
+      icon: (
+        <svg width="18" height="18" viewBox="0 0 16 16" fill="none">
+          <circle cx="8" cy="8" r="6" stroke="currentColor" strokeWidth="1.6"/>
+          <path d="M5.5 8l2 2 3.5-3.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      ),
+      onClick: () => {
+        document.getElementById('record-id-input')?.focus();
+      },
     },
   ];
 
@@ -114,28 +140,83 @@ export default function DoctorDashboard() {
     <Layout navItems={navItems}>
       {/* Page header */}
       <div className="page-header">
-        <h1>Doctor Dashboard</h1>
-        <p className="page-description">
-          View healthcare records that patients have authorized you to access.
-        </p>
+        <div className="page-header-left">
+          <h1>Doctor Dashboard</h1>
+          <p className="page-description">
+            Access healthcare records that patients have authorized you to view.
+          </p>
+        </div>
+      </div>
+
+      {/* Doctor Summary Metrics */}
+      <div className="summary-grid">
+        <div className="summary-card">
+          <div className="summary-card-header">
+            <span className="summary-card-label">Accessible Records</span>
+            <div className="summary-card-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M4 3h12a1 1 0 011 1v12a1 1 0 01-1 1H4a1 1 0 01-1-1V4a1 1 0 011-1z" stroke="currentColor" strokeWidth="1.6"/>
+                <path d="M7 7h6M7 10h6M7 13h4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/>
+              </svg>
+            </div>
+          </div>
+          <div className="summary-card-value">1</div>
+          <div className="summary-card-sub">Granted for this session</div>
+        </div>
+
+        <div className="summary-card">
+          <div className="summary-card-header">
+            <span className="summary-card-label">Current Session</span>
+            <div className="summary-card-icon" style={{ backgroundColor: 'var(--color-success-bg)', color: 'var(--color-success)' }} aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <circle cx="10" cy="7" r="4" stroke="currentColor" strokeWidth="1.6"/>
+                <path d="M3 17a7 7 0 0114 0" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/>
+              </svg>
+            </div>
+          </div>
+          <div className="summary-card-value" style={{ fontSize: '1.4rem' }}>Doctor</div>
+          <div className="summary-card-sub">Authorized medical practitioner</div>
+        </div>
+
+        <div className="summary-card">
+          <div className="summary-card-header">
+            <span className="summary-card-label">Access Control</span>
+            <div className="summary-card-icon" style={{ backgroundColor: 'var(--color-accent-light)', color: 'var(--color-accent)' }} aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <rect x="4" y="9" width="12" height="8" rx="2" stroke="currentColor" strokeWidth="1.6"/>
+                <path d="M7 9V6a3 3 0 116 0v3" stroke="currentColor" strokeWidth="1.6"/>
+              </svg>
+            </div>
+          </div>
+          <div className="summary-card-value" style={{ fontSize: '1.3rem', color: 'var(--color-accent)' }}>
+            Blockchain Verified
+          </div>
+          <div className="summary-card-sub">On-chain consent enforcement</div>
+        </div>
       </div>
 
       {/* Wallet address */}
       <div className="info-bar" aria-label="Connected wallet information">
-        <span className="info-label">Your Wallet Address</span>
-        <span className="info-value" title={walletAddress}>{walletAddress || '—'}</span>
+        <div className="info-bar-left">
+          <span className="info-label">Doctor Wallet Address</span>
+          <span className="info-value" title={walletAddress}>{walletAddress || '—'}</span>
+        </div>
+        <div style={{ fontSize: '0.8125rem', color: 'var(--color-text-muted)' }}>
+          Role: <strong style={{ color: 'var(--color-success)' }}>Doctor</strong>
+        </div>
       </div>
 
       {/* Record lookup card */}
       <div className="card">
         <div className="card-header">
-          <h2>Record Access Check</h2>
+          <div>
+            <h2>Check Record Access</h2>
+            <p style={{ fontSize: '0.875rem', color: 'var(--color-text-muted)', marginTop: '4px' }}>
+              Enter a record ID to verify whether you are authorized to access it.
+            </p>
+          </div>
         </div>
         <div className="card-body">
-          <p style={{ fontSize: 'var(--font-size-sm)', color: 'var(--color-text-secondary)', marginBottom: '20px' }}>
-            Enter a Record ID to verify whether you have been granted access by the patient.
-          </p>
-
           <form onSubmit={handleCheckAccess}>
             <div className="lookup-section">
               <div className="form-group">
@@ -155,10 +236,10 @@ export default function DoctorDashboard() {
                   autoComplete="off"
                 />
               </div>
-              <div style={{ paddingBottom: '20px' }}>
+              <div>
                 <button
                   type="submit"
-                  className="btn btn-primary"
+                  className="btn btn-primary btn-lg"
                   disabled={checkLoading}
                   id="check-access-btn"
                 >
@@ -168,7 +249,7 @@ export default function DoctorDashboard() {
                       Checking...
                     </>
                   ) : (
-                    'Check Record'
+                    'Check Access'
                   )}
                 </button>
               </div>
@@ -198,35 +279,34 @@ export default function DoctorDashboard() {
               {accessResult.authorized ? (
                 <>
                   <div className="access-result-title">
-                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-                      <circle cx="9" cy="9" r="8" stroke="currentColor" strokeWidth="1.5"/>
-                      <path d="M6 9l2 2 4-4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                    <svg width="22" height="22" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                      <circle cx="10" cy="10" r="9" stroke="currentColor" strokeWidth="1.8"/>
+                      <path d="M6 10l3 3 5-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
-                    Access Granted
+                    ACCESS GRANTED
                   </div>
                   <div className="access-result-desc">
-                    You are authorized to view record{' '}
-                    <strong style={{ fontFamily: 'Courier New, monospace' }}>{recordId.trim()}</strong>.
+                    You are authorized to view this record (<strong style={{ fontFamily: 'Courier New, monospace' }}>{recordId.trim()}</strong>).
                   </div>
 
                   {/* View Record button — only shown when access is granted */}
                   {!recordData && (
-                    <div style={{ marginTop: '14px' }}>
+                    <div style={{ marginTop: '18px' }}>
                       {viewLoading ? (
-                        <LoadingState message="Loading record content..." />
+                        <LoadingState message="Retrieving record from IPFS..." />
                       ) : (
                         <>
                           {viewError && (
                             <div
                               className="error-state"
                               role="alert"
-                              style={{ marginBottom: '10px' }}
+                              style={{ marginBottom: '12px' }}
                             >
                               {viewError}
                             </div>
                           )}
                           <button
-                            className="btn btn-primary"
+                            className="btn btn-primary btn-lg"
                             onClick={handleViewRecord}
                             id="view-record-btn"
                           >
@@ -240,27 +320,35 @@ export default function DoctorDashboard() {
               ) : (
                 <>
                   <div className="access-result-title">
-                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-                      <circle cx="9" cy="9" r="8" stroke="currentColor" strokeWidth="1.5"/>
-                      <path d="M6 6l6 6M12 6l-6 6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+                    <svg width="22" height="22" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                      <circle cx="10" cy="10" r="9" stroke="currentColor" strokeWidth="1.8"/>
+                      <path d="M7 7l6 6M13 7l-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
                     </svg>
-                    Access Denied
+                    ACCESS DENIED
                   </div>
                   <div className="access-result-desc">
-                    Your access to record{' '}
-                    <strong style={{ fontFamily: 'Courier New, monospace' }}>{recordId.trim()}</strong>{' '}
-                    has been revoked or has not been granted.
+                    You are not authorized to view this record.
+                    Access may have been revoked by the patient or was never granted.
                   </div>
                   <div
                     style={{
-                      marginTop: '10px',
-                      fontSize: 'var(--font-size-xs)',
+                      marginTop: '12px',
+                      fontSize: '0.8125rem',
                       color: 'var(--color-danger)',
-                      opacity: 0.8,
+                      opacity: 0.85,
                     }}
                   >
-                    The patient controls access to this record through the blockchain smart contract.
-                    Contact the patient to request access.
+                    Consent permissions are verified against the Ethereum smart contract audit registry.
+                  </div>
+                  <div style={{ marginTop: '16px' }}>
+                    <button
+                      type="button"
+                      className="btn btn-secondary"
+                      onClick={resetCheck}
+                      id="check-again-btn"
+                    >
+                      Check Again
+                    </button>
                   </div>
                 </>
               )}

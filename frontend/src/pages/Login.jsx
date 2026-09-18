@@ -56,33 +56,36 @@ export default function Login() {
         </div>
 
         <div className="login-left-content">
-          <h2>Secure. Decentralized. Patient-controlled.</h2>
+          <h2>
+            Secure. Decentralized.<br />
+            Patient-controlled.
+          </h2>
           <p>
-            A blockchain-powered healthcare record management system that puts
-            patients in full control of their medical data.
+            A blockchain-backed healthcare record management portal that puts
+            patients in total control of medical record consent and doctor access.
           </p>
           <div className="login-features">
             <div className="login-feature-item">
               <span className="login-feature-dot"></span>
-              Immutable audit trail for every access event
+              Patient-controlled access
             </div>
             <div className="login-feature-item">
               <span className="login-feature-dot"></span>
-              Patient-controlled doctor access permissions
+              Secure healthcare records
             </div>
             <div className="login-feature-item">
               <span className="login-feature-dot"></span>
-              IPFS-based decentralized file storage
+              Blockchain-backed permissions
             </div>
             <div className="login-feature-item">
               <span className="login-feature-dot"></span>
-              Ethereum smart contract access enforcement
+              Decentralized record storage
             </div>
           </div>
         </div>
 
         <div className="login-footer-note">
-          VITP — Blockchain Technology Course Project
+          Healthcare Record Management System • Blockchain Project
         </div>
       </div>
 
@@ -95,8 +98,7 @@ export default function Login() {
           </p>
 
           <div className="demo-note" role="note">
-            <strong>Demo Mode:</strong> Enter any name and select your role to log in.
-            No password required for this demonstration.
+            <strong>Demo Mode:</strong> Select a role or use one of the one-click demo profiles below to enter the portal.
           </div>
 
           {error && (
@@ -145,6 +147,7 @@ export default function Login() {
               className="btn btn-primary btn-block btn-lg"
               disabled={loading}
               id="login-submit-btn"
+              style={{ marginTop: '8px' }}
             >
               {loading ? (
                 <>
@@ -158,32 +161,52 @@ export default function Login() {
           </form>
 
           {/* Quick fill buttons for demo convenience */}
-          <div style={{ marginTop: '32px', borderTop: '1px solid var(--color-border-light)', paddingTop: '22px' }}>
-            <p style={{ fontSize: 'var(--font-size-xs)', fontWeight: 'var(--font-weight-medium)', color: 'var(--color-text-muted)', marginBottom: '12px', textAlign: 'center', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-              One-Click Demo Profiles
+          <div style={{ marginTop: '32px', borderTop: '1px solid var(--color-border-light)', paddingTop: '24px' }}>
+            <p style={{ fontSize: '0.75rem', fontWeight: 'var(--font-weight-bold)', color: 'var(--color-text-muted)', marginBottom: '14px', textAlign: 'center', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+              DEMO PROFILES
             </p>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
               <button
                 type="button"
                 className="btn btn-secondary"
-                style={{ padding: '10px 12px', fontSize: 'var(--font-size-xs)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}
+                style={{
+                  padding: '12px 14px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'flex-start',
+                  textAlign: 'left',
+                  gap: '4px',
+                  borderRadius: 'var(--radius-md)',
+                  border: role === 'patient' && name === 'Riya Sharma' ? '2px solid var(--color-accent)' : '1px solid var(--color-border)',
+                  backgroundColor: role === 'patient' && name === 'Riya Sharma' ? 'var(--color-accent-light)' : '#ffffff',
+                }}
                 onClick={() => { setName('Riya Sharma'); setRole('patient'); }}
                 disabled={loading}
                 id="demo-patient-btn"
               >
-                <span style={{ fontWeight: 'var(--font-weight-semibold)', color: 'var(--color-text-primary)' }}>Riya Sharma</span>
-                <span style={{ color: 'var(--color-accent)', fontSize: '11px' }}>Patient</span>
+                <span style={{ fontWeight: 'var(--font-weight-bold)', color: 'var(--color-text-primary)', fontSize: '0.9375rem' }}>Riya Sharma</span>
+                <span style={{ color: 'var(--color-accent)', fontSize: '0.8125rem', fontWeight: 'var(--font-weight-semibold)' }}>Patient</span>
               </button>
               <button
                 type="button"
                 className="btn btn-secondary"
-                style={{ padding: '10px 12px', fontSize: 'var(--font-size-xs)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}
+                style={{
+                  padding: '12px 14px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'flex-start',
+                  textAlign: 'left',
+                  gap: '4px',
+                  borderRadius: 'var(--radius-md)',
+                  border: role === 'doctor' && name === 'Dr. Kapoor' ? '2px solid var(--color-success)' : '1px solid var(--color-border)',
+                  backgroundColor: role === 'doctor' && name === 'Dr. Kapoor' ? 'var(--color-success-bg)' : '#ffffff',
+                }}
                 onClick={() => { setName('Dr. Kapoor'); setRole('doctor'); }}
                 disabled={loading}
                 id="demo-doctor-btn"
               >
-                <span style={{ fontWeight: 'var(--font-weight-semibold)', color: 'var(--color-text-primary)' }}>Dr. Kapoor</span>
-                <span style={{ color: 'var(--color-success)', fontSize: '11px' }}>Doctor</span>
+                <span style={{ fontWeight: 'var(--font-weight-bold)', color: 'var(--color-text-primary)', fontSize: '0.9375rem' }}>Dr. Kapoor</span>
+                <span style={{ color: 'var(--color-success)', fontSize: '0.8125rem', fontWeight: 'var(--font-weight-semibold)' }}>Doctor</span>
               </button>
             </div>
           </div>

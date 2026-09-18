@@ -62,14 +62,14 @@ export default function GrantAccessModal({ record, onSuccess }) {
   return (
     <>
       <button
-        className="btn btn-sm btn-secondary"
+        className="btn btn-secondary"
         onClick={handleOpen}
         id={`grant-access-${record.recordId}`}
       >
         Grant Access
       </button>
 
-      <Modal isOpen={isOpen} onClose={handleClose} title="Grant Doctor Access" size="sm">
+      <Modal isOpen={isOpen} onClose={handleClose} title="Grant Doctor Access">
         {grantResult ? (
           <div className="modal-body">
             <div className="success-block">
@@ -83,9 +83,12 @@ export default function GrantAccessModal({ record, onSuccess }) {
         ) : (
           <form onSubmit={handleSubmit}>
             <div className="modal-body">
-              <p style={{ fontSize: 'var(--font-size-sm)', color: 'var(--color-text-secondary)', marginBottom: '16px' }}>
-                Grant a doctor access to: <strong>{record.label}</strong>
+              <p style={{ fontSize: '1rem', color: 'var(--color-text-secondary)', marginBottom: '8px' }}>
+                Authorize a doctor to access this healthcare record.
               </p>
+              <div style={{ fontSize: '0.875rem', color: 'var(--color-text-muted)', marginBottom: '20px', padding: '8px 12px', background: 'var(--color-bg)', borderRadius: 'var(--radius-sm)' }}>
+                Record: <strong style={{ color: 'var(--color-text-primary)' }}>{record.label}</strong> ({record.recordId})
+              </div>
 
               {error && (
                 <div className="error-state" role="alert">

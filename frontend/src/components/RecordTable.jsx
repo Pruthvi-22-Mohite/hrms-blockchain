@@ -54,58 +54,71 @@ export default function RecordTable({ records, loading, error, onRecordUpdate })
         <thead>
           <tr>
             <th scope="col">Record</th>
-            <th scope="col">Uploaded</th>
+            <th scope="col">Date</th>
             <th scope="col">Authorized Doctors</th>
+            <th scope="col">Status</th>
             <th scope="col">Actions</th>
           </tr>
         </thead>
         <tbody>
-          {records.map((record) => (
-            <tr key={record.recordId}>
-              {/* Record info */}
-              <td>
-                <div className="table-cell-primary">{record.label}</div>
-                <div className="table-cell-secondary" style={{ fontFamily: 'Courier New, monospace' }}>
-                  {record.recordId}
-                </div>
-              </td>
-
-              {/* Upload date */}
-              <td>
-                <div className="table-cell-primary">{formatDate(record.uploadedAt)}</div>
-              </td>
-
-              {/* Authorized doctors */}
-              <td>
-                {record.authorizedDoctors && record.authorizedDoctors.length > 0 ? (
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px' }}>
-                    {record.authorizedDoctors.map((doc) => (
-                      <div key={doc.walletAddress} style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '4px' }}>
-                        <span className="doctor-chip">{doc.name}</span>
-                        <RevokeAccessModal
-                          record={record}
-                          doctor={doc}
-                          onSuccess={() => onRecordUpdate()}
-                        />
-                      </div>
-                    ))}
+          {records.map((record) => {
+            const hasDoctors = record.authorizedDoctors && record.authorizedDoctors.length > 0;
+            return (
+              <tr key={record.recordId}>
+                {/* Record info */}
+                <td>
+                  <div className="table-cell-primary">{record.label}</div>
+                  <div className="table-cell-secondary" style={{ fontFamily: 'Courier New, monospace' }}>
+                    {record.recordId}
                   </div>
-                ) : (
-                  <span className="no-doctors">No doctors authorized</span>
-                )}
-              </td>
+                </td>
 
-              {/* Actions */}
-              <td>
-                <div className="table-actions">
-                  <GrantAccessModal
-                    record={record}
-                    onSuccess={() => onRecordUpdate()}
-                  />
-                </div>
-              </td>
-            </tr>
-          ))}
+                {/* Date */}
+                <td>
+                  <div className="table-cell-primary">{formatDate(record.uploadedAt)}</div>
+                </td>
+
+                {/* Authorized doctors */}
+                <td>
+                  {hasDoctors ? (
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                      {record.authorizedDoctors.map((doc) => (
+                        <div key={doc.walletAddress} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                          <span className="doctor-chip">{doc.name}</span>
+                          <RevokeAccessModal
+                            record={record}
+                            doctor={doc}
+                            onSuccess={() => onRecordUpdate()}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <span className="no-doctors">No doctors authorized</span>
+                  )}
+                </td>
+
+                {/* Status Badge */}
+                <td>
+                  {hasDoctors ? (
+                    <span className="badge badge-authorized">Authorized</span>
+                  ) : (
+                    <span className="badge badge-neutral">Private</span>
+                  )}
+                </td>
+
+                {/* Actions */}
+                <td>
+                  <div className="table-actions">
+                    <GrantAccessModal
+                      record={record}
+                      onSuccess={() => onRecordUpdate()}
+                    />
+                  </div>
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>
