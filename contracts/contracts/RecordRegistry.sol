@@ -121,8 +121,9 @@ contract RecordRegistry {
         recordExists(recordId)
         returns (address owner, string memory cid, bytes32 fileHash, uint256 timestamp)
     {
-        require(checkAccess(msg.sender, recordId), "RecordRegistry: caller not authorized");
         Record storage r = records[recordId];
+        bool authorized = r.owner == msg.sender || authorizedAccess[recordId][msg.sender];
+        require(authorized, "RecordRegistry: caller not authorized");
         return (r.owner, r.cid, r.fileHash, r.timestamp);
     }
 
