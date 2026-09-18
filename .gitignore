@@ -34,3 +34,12 @@ Thumbs.db
 # misc
 coverage/
 *.local
+
+# Markdown: ignore everything by default, only these are pushed
+*.md
+!README.md
+!docs/PRD.md
+!docs/architecture.md
+
+# Claude Code local settings
+.claude/

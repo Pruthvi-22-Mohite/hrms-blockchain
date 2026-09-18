@@ -60,8 +60,9 @@ Set `VITE_API_BASE_URL` in `frontend/.env.local` to point at the backend (or a m
 
 ## Docs
 
-- `docs/architecture.md` — full technical architecture and build order
-- API contract for the frontend — see the shared frontend brief (linked in the team chat)
+- `docs/PRD.md` — requirements, scope, success criteria for the midsem demo
+- `docs/architecture.md` — full technical architecture, build order, and API contract
+- API contract for the frontend — also see the shared frontend brief (linked in the team chat)
 
 ## Branching
 
