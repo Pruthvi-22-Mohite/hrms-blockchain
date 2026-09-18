@@ -158,30 +158,32 @@ export default function Login() {
           </form>
 
           {/* Quick fill buttons for demo convenience */}
-          <div style={{ marginTop: '28px', borderTop: '1px solid var(--color-border-light)', paddingTop: '20px' }}>
-            <p style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-text-muted)', marginBottom: '10px', textAlign: 'center' }}>
-              Quick fill for demo
+          <div style={{ marginTop: '32px', borderTop: '1px solid var(--color-border-light)', paddingTop: '22px' }}>
+            <p style={{ fontSize: 'var(--font-size-xs)', fontWeight: 'var(--font-weight-medium)', color: 'var(--color-text-muted)', marginBottom: '12px', textAlign: 'center', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+              One-Click Demo Profiles
             </p>
-            <div style={{ display: 'flex', gap: '8px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
               <button
                 type="button"
                 className="btn btn-secondary"
-                style={{ flex: 1, fontSize: 'var(--font-size-xs)' }}
+                style={{ padding: '10px 12px', fontSize: 'var(--font-size-xs)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}
                 onClick={() => { setName('Riya Sharma'); setRole('patient'); }}
                 disabled={loading}
                 id="demo-patient-btn"
               >
-                Riya Sharma (Patient)
+                <span style={{ fontWeight: 'var(--font-weight-semibold)', color: 'var(--color-text-primary)' }}>Riya Sharma</span>
+                <span style={{ color: 'var(--color-accent)', fontSize: '11px' }}>Patient</span>
               </button>
               <button
                 type="button"
                 className="btn btn-secondary"
-                style={{ flex: 1, fontSize: 'var(--font-size-xs)' }}
+                style={{ padding: '10px 12px', fontSize: 'var(--font-size-xs)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}
                 onClick={() => { setName('Dr. Kapoor'); setRole('doctor'); }}
                 disabled={loading}
                 id="demo-doctor-btn"
               >
-                Dr. Kapoor (Doctor)
+                <span style={{ fontWeight: 'var(--font-weight-semibold)', color: 'var(--color-text-primary)' }}>Dr. Kapoor</span>
+                <span style={{ color: 'var(--color-success)', fontSize: '11px' }}>Doctor</span>
               </button>
             </div>
           </div>

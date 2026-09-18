@@ -8,7 +8,7 @@ import {
   mockViewRecord,
 } from './mock';
 
-const USE_MOCK = import.meta.env.VITE_USE_MOCK === 'true';
+const USE_MOCK = import.meta.env.VITE_USE_MOCK !== 'false';
 
 /**
  * GET /records/mine
