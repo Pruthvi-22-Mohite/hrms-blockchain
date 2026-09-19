@@ -31,7 +31,18 @@ function walletFor(name, role) {
 
 const MIN_BALANCE = ethers.parseEther("0.1");
 
-async function ensureRegistered(wallet, role) {
+// Simultaneous first logins for the same wallet share one registration attempt.
+const registrations = new Map();
+function ensureRegistered(wallet, role) {
+  const key = `${role}:${wallet.address}`;
+  if (!registrations.has(key)) {
+    const attempt = register(wallet, role).finally(() => registrations.delete(key));
+    registrations.set(key, attempt);
+  }
+  return registrations.get(key);
+}
+
+async function register(wallet, role) {
   if (role === "patient") {
     if (await userRegistry.isPatient(wallet.address)) return;
     if ((await provider.getBalance(wallet.address)) < MIN_BALANCE) {
