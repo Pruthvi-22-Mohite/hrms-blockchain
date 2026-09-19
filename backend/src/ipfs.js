@@ -17,14 +17,15 @@ async function pin(buffer, fileName) {
   }
   const form = new FormData();
   form.append("file", new Blob([buffer]), fileName);
-  const res = await fetch("https://api.pinata.cloud/pinning/pinFileWithMetadata", {
+  form.append("network", "public");
+  const res = await fetch("https://uploads.pinata.cloud/v3/files", {
     method: "POST",
     headers: { Authorization: `Bearer ${pinataJwt}` },
     body: form,
   });
   if (!res.ok) throw new Error(`Pinata upload failed: ${res.status} ${await res.text()}`);
-  const { IpfsHash } = await res.json();
-  return IpfsHash;
+  const { data } = await res.json();
+  return data.cid;
 }
 
 async function fetchByCid(cid) {
