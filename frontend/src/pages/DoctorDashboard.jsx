@@ -225,7 +225,7 @@ export default function DoctorDashboard() {
                   id="record-id-input"
                   type="text"
                   className="form-control"
-                  placeholder="e.g. rec_101"
+                  placeholder="e.g. 1"
                   value={recordId}
                   onChange={(e) => {
                     setRecordId(e.target.value);
