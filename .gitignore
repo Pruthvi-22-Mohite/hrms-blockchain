@@ -43,3 +43,7 @@ coverage/
 
 # Claude Code local settings
 .claude/
+
+# Backend local state
+backend/data/
+backend/.local-ipfs/
